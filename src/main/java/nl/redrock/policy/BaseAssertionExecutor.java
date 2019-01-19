@@ -71,5 +71,6 @@ public abstract class BaseAssertionExecutor extends AssertionExecutor {
         }
         return propertyValue;
     }
+    
 
 }

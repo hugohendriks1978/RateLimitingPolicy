@@ -38,4 +38,5 @@ public class RateLimitSetting {
     public void setCallMoment(Date callMoment) {
         this.callMoment = callMoment;
     }
+    
 }

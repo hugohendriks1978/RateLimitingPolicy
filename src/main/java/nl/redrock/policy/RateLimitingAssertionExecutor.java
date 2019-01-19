@@ -20,14 +20,11 @@ import oracle.wsm.policyengine.IExecutionContext;
 public class RateLimitingAssertionExecutor extends BaseAssertionExecutor {
 
     private int limit;
-    //private long amountOfActuallCalls = 0;
-    //private Date callMoment;
     private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    private Map<String, RateLimitSetting> rateLimitSettings;
+    private Map<String, RateLimitSetting> rateLimitSettings = new HashMap();
 
     public RateLimitingAssertionExecutor() {
         super("ServiceExecutionReporter");
-        this.rateLimitSettings = new HashMap();
     }
 
     @Override
@@ -64,7 +61,9 @@ public class RateLimitingAssertionExecutor extends BaseAssertionExecutor {
                 if (setting.getCallMoment() == null) {
                     setting.setCallMoment(Calendar.getInstance().getTime());
                     setting.setAmountOfActuallCalls(setting.getAmountOfActuallCalls() + 1);
-                    System.out.println("---------------Eerste keer! " + format.format(setting.getCallMoment()));
+                    System.out.println(DEBUG_START);
+                    System.out.println("First time! " + format.format(setting.getCallMoment()));
+                    System.out.println(DEBUG_END);
                 } //de service is al een keer aangeroepen. 
                 else {
                     Date now = Calendar.getInstance().getTime();
@@ -72,7 +71,9 @@ public class RateLimitingAssertionExecutor extends BaseAssertionExecutor {
                     if (now.getTime() - setting.getCallMoment().getTime() > 60000) {
                         setting.setAmountOfActuallCalls(0);
                         setting.setCallMoment(now);
-                        System.out.println("---------------Reset!" + format.format(now));
+                        System.out.println(DEBUG_START);
+                        System.out.println("Reset!" + format.format(now));
+                        System.out.println(DEBUG_END);
                         setting.setAmountOfActuallCalls(setting.getAmountOfActuallCalls() + 1);
                         result.setStatus(IResult.SUCCEEDED);
                     } //als deze binnen de minuut valt, tel dan 1 op bij het aantal
@@ -80,11 +81,15 @@ public class RateLimitingAssertionExecutor extends BaseAssertionExecutor {
                         //als we ook nog binnen de limiet zitten, dan mag het nog
                         if (setting.getAmountOfActuallCalls() < limit) {
                             setting.setAmountOfActuallCalls(setting.getAmountOfActuallCalls() + 1);
-                            System.out.println("---------------" + setting.getAmountOfActuallCalls());
+                            System.out.println(DEBUG_START);
+                            System.out.println(setting.getAmountOfActuallCalls());
+                            System.out.println(DEBUG_END);
                             result.setStatus(IResult.SUCCEEDED);
                         } //het aantal calls per minuut is bereikt
                         else {
-                            System.out.println("---------------Limiet bereikt!");
+                            System.out.println(DEBUG_START);
+                            System.out.println("Limit reached");
+                            System.out.println(DEBUG_END);
                             result.setStatus(IResult.FAILED);
                             throw new WSMException("Rate limit reached in 1 minute");
                         }
