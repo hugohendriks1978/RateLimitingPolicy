@@ -1,0 +1,27 @@
+<wsp:Policy orawsp:attachTo="binding.server"
+    orawsp:category="management"
+    orawsp:description="This is a rate limiting policy"
+    orawsp:displayName="Rate Limiting Policy"
+    orawsp:local-optimization="off" orawsp:status="enabled"
+    wsp:Name="redrock/ratelimiting"
+    wsp:description="This policy checks how often a service may be called."
+    wsu:Id="soasuite-rate-limiting_policy"
+    xmlns:custom="nl.redrock/RateLimitingPolicy"
+    xmlns:orawsp="http://schemas.oracle.com/ws/2006/01/policy"
+    xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <custom:RateLimitingPolicy orawsp:Enforced="true"
+        orawsp:Silent="true" orawsp:category="management/custom" orawsp:name="Rate Limiting Policy">
+        <orawsp:bindings>
+            <orawsp:Implementation>nl.redrock.policy.RateLimitingAssertionExecutor</orawsp:Implementation>
+            <orawsp:Config orawsp:configType="declarative" orawsp:name="rate-limiting-policy">
+                <orawsp:PropertySet orawsp:name="policy_config">
+                    <orawsp:Property orawsp:contentType="optional"
+                        orawsp:name="limit" orawsp:type="int">
+                        <orawsp:Value>5</orawsp:Value>
+                    </orawsp:Property>
+                </orawsp:PropertySet>
+            </orawsp:Config>
+        </orawsp:bindings>
+    </custom:RateLimitingPolicy>
+</wsp:Policy>

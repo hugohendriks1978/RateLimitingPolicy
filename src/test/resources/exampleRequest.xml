@@ -1,0 +1,27 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+                  xmlns:urn="urn:cvgz.nl:zorg:productservice:cdm" 
+                  xmlns:urn1="urn:cvgz.nl:zorg:productservice" 
+                  xmlns:urn2="urn:cvgz.nl:zorg:productservice:cdm">
+   <soapenv:Header>
+      <urn:BerichtKenmerken>
+         <urn:ConversationId>UT-3296638-8372-490</urn:ConversationId>
+         <urn:MutatiebronCode>OSB</urn:MutatiebronCode>
+         <urn:MerkCode>VGZ</urn:MerkCode>
+         <urn:Gebruiker>soap_ui_user</urn:Gebruiker>
+         <urn:GebruikersRol>Tester</urn:GebruikersRol>
+         <urn:TijdstipAangemaakt>2016-06-01T10:19:33</urn:TijdstipAangemaakt>
+      </urn:BerichtKenmerken>
+   </soapenv:Header>
+   <soapenv:Body>
+      <urn1:GeefProductStructuurRequest>
+         <urn2:MerkCode>VGZ</urn2:MerkCode>
+         <urn2:CollectiviteitsNummerIntern>10031</urn2:CollectiviteitsNummerIntern>
+         <urn2:DatumReferentie>2015-01-01</urn2:DatumReferentie>
+         <urn2:BetaalFrequentie>3</urn2:BetaalFrequentie>
+         <urn2:ProcesGegevens>
+			<urn2:AanmeldDatum>2015-12-01</urn2:AanmeldDatum>
+			<urn2:EmailAdres>vgz@vgz.nl</urn2:EmailAdres>
+         </urn2:ProcesGegevens>
+      </urn1:GeefProductStructuurRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<policy-config>
+    <policy-model-config>
+        <entry>
+           <key namespace="nl.redrock/RateLimitingPolicy" elementName="RateLimitingPolicy"/>
+           <executor-classname>nl.redrock.policy.RateLimitingAssertionExecutor</executor-classname>
+        </entry>
+    </policy-model-config>
+</policy-config>
